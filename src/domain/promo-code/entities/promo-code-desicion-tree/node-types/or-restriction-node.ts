@@ -7,13 +7,24 @@ export class OrRestrictionNode extends PromoCodeDecisionTreeNode {
     this._type = '@or';
   }
 
-  isValid(params: IsValidPromoCodeParams, reasons: string[]): boolean {
+  isValid(params: IsValidPromoCodeParams, reasons: any[]): boolean {
+    const children = this._children;
     if (this._children.length < 2) {
       throw new Error('OR node must have at least two child');
     }
-    let isValid = this._children[0].isValid(params, reasons);
-    for (let i = 1; i < this._children.length; i++) {
-      isValid = isValid || this._children[i].isValid(params, reasons);
+
+    const reasonForOr = [];
+    let isValid = children[0].isValid(params, reasonForOr);
+
+    for (let i = 1; i < children.length; i++) {
+      isValid = isValid || children[i].isValid(params, reasonForOr);
+    }
+
+    if (!isValid) {
+      reasons.push({
+        type: this._type,
+        reason: reasonForOr,
+      });
     }
     return isValid;
   }

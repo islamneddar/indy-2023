@@ -13,7 +13,7 @@ export class DateRestrictionNode extends PromoCodeDecisionTreeNode {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isValid(params: IsValidPromoCodeParams, reason: string[]): boolean {
+  isValid(params: IsValidPromoCodeParams, reason: any[]): boolean {
     const now = new Date();
 
     const isValid =

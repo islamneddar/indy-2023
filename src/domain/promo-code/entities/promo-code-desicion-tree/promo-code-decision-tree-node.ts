@@ -8,7 +8,7 @@ export abstract class PromoCodeDecisionTreeNode {
     this._children.push(node);
   }
 
-  abstract isValid(params: IsValidPromoCodeParams, reasons: string[]): boolean;
+  abstract isValid(params: IsValidPromoCodeParams, reasons: any[]): boolean;
 
   toString() {
     return JSON.stringify(this);

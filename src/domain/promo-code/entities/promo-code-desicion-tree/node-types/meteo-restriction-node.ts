@@ -13,7 +13,7 @@ export class MeteoRestrictionNode extends PromoCodeDecisionTreeNode {
     this._temp = temp;
   }
 
-  isValid(params: IsValidPromoCodeParams, reason: string[]): boolean {
+  isValid(params: IsValidPromoCodeParams, reason: any[]): boolean {
     if (!params || !params.meteoIs || !params.meteoTemp) {
       throw new Error('Meteo Data is not defined');
     }

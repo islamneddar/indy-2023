@@ -10,13 +10,14 @@ export class AgeRestrictionNode extends PromoCodeDecisionTreeNode {
     this._age = age;
   }
 
-  isValid(params: IsValidPromoCodeParams, reason: string[]): boolean {
+  isValid(params: IsValidPromoCodeParams, reason: any[]): boolean {
     if (!params || !params.age) {
       throw new Error('Age is not defined');
     }
     const age = params.age;
 
     const isValid = this._age.isValid(age);
+
     if (!isValid) {
       reason.push(
         `Age is not valid for the age restriction : ${this.toString()}`,

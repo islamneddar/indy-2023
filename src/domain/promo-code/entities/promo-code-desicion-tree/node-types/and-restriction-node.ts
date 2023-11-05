@@ -7,13 +7,24 @@ export class AndRestrictionNode extends PromoCodeDecisionTreeNode {
     this._type = '@and';
   }
 
-  isValid(params: IsValidPromoCodeParams, reasons): boolean {
-    if (this._children.length < 2) {
+  isValid(params: IsValidPromoCodeParams, reasons: any[]): boolean {
+    const children = this._children;
+    if (children.length < 2) {
       throw new Error('AND node must have at least two child');
     }
-    let isValid = this._children[0].isValid(params, reasons);
-    for (let i = 1; i < this._children.length; i++) {
-      isValid = isValid && this._children[i].isValid(params, reasons);
+
+    const reasonForAnd = [];
+    let isValid = children[0].isValid(params, reasonForAnd);
+
+    for (let i = 1; i < children.length; i++) {
+      isValid = isValid && children[i].isValid(params, reasonForAnd);
+    }
+
+    if (!isValid) {
+      reasons.push({
+        type: this._type,
+        reason: reasonForAnd,
+      });
     }
     return isValid;
   }
