@@ -7,6 +7,9 @@ export class PromoCodeEntity {
   private _advantage: PromoCodeAdvantageEntity;
   private _restrictionsTree: PromoCodeRestrictionDecisionTree;
 
+  get id(): string {
+    return this._id;
+  }
   set id(id: string) {
     this._id = id;
   }

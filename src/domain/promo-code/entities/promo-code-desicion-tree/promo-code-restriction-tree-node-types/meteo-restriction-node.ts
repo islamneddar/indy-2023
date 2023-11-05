@@ -1,8 +1,8 @@
-import {PromoCodeDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-decision-tree-node';
+import {PromoCodeRestrictionDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-restriction-decision-tree-node';
 import {ComparisonRules} from '@/domain/promo-code/entities/comparison-rules';
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 
-export class MeteoRestrictionNode extends PromoCodeDecisionTreeNode {
+export class MeteoRestrictionNode extends PromoCodeRestrictionDecisionTreeNode {
   _is: string;
   _temp: ComparisonRules;
 

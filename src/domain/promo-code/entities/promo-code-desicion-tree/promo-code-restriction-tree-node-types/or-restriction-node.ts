@@ -1,7 +1,7 @@
-import {PromoCodeDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-decision-tree-node';
+import {PromoCodeRestrictionDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-restriction-decision-tree-node';
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 
-export class OrRestrictionNode extends PromoCodeDecisionTreeNode {
+export class OrRestrictionNode extends PromoCodeRestrictionDecisionTreeNode {
   constructor() {
     super();
     this._type = '@or';

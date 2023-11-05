@@ -1,7 +1,7 @@
-import {PromoCodeDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-decision-tree-node';
+import {PromoCodeRestrictionDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-restriction-decision-tree-node';
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 
-export class AndRestrictionNode extends PromoCodeDecisionTreeNode {
+export class AndRestrictionNode extends PromoCodeRestrictionDecisionTreeNode {
   constructor() {
     super();
     this._type = '@and';
@@ -26,6 +26,7 @@ export class AndRestrictionNode extends PromoCodeDecisionTreeNode {
         reason: reasonForAnd,
       });
     }
+
     return isValid;
   }
 }

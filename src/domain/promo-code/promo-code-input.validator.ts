@@ -6,6 +6,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
+// create code promo
 type RestrictionArrayType = (
   | AgeRestriction
   | MeteoRestriction
@@ -80,6 +81,7 @@ export class CreatePromoCodeRequest {
   restrictions: RestrictionArrayType;
 }
 
+// validate code promo
 class MeteoValidationArguments {
   @IsString()
   town: string;

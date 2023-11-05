@@ -44,4 +44,5 @@ export interface IsValidPromoCodeParams {
   age?: number;
   meteoIs?: string;
   meteoTemp?: number;
+  selectedDate?: Date;
 }

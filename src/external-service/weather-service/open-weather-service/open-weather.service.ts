@@ -3,17 +3,21 @@ import {GetWeatherByCityResponse} from '@/external-service/weather-service/weath
 import axios from 'axios';
 import {ConfigService} from '@nestjs/config';
 import {Inject} from '@nestjs/common';
-import {OPEN_WEATHER_API_KEY} from '@/config/key.constant';
+import {
+  OPEN_WEATHER_API_KEY,
+  OPEN_WEATHER_ENDPOINT,
+} from '@/config/key.constant';
 
 export class OpenWeatherService implements WeatherServiceInterface {
-  private endpoint = 'https://api.openweathermap.org/data/2.5/weather';
-  private apiKey: string;
+  private readonly endpoint: string;
+  private readonly apiKey: string;
 
   constructor(@Inject(ConfigService) configService: ConfigService) {
     this.apiKey = configService.get(OPEN_WEATHER_API_KEY);
+    this.endpoint = configService.get(OPEN_WEATHER_ENDPOINT);
   }
   async getWeatherByCity(city: string): Promise<GetWeatherByCityResponse> {
-    // we can add a retry system
+    // we can add a retry system later
     try {
       const weather = await axios.get(this.endpoint, {
         params: {

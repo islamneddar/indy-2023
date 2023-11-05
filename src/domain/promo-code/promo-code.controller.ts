@@ -10,11 +10,9 @@ import {
 import {
   CreatePromoCodeRequest,
   ValidatePromoCodeRequest,
-} from '@/domain/promo-code/promo-code.dto';
+} from '@/domain/promo-code/promo-code-input.validator';
 import {PromoCodeEntity} from '@/domain/promo-code/entities/promo-code.entity';
-import {v4 as uuidv4} from 'uuid';
-import {PromoCodeAdvantageEntity} from '@/domain/promo-code/entities/promo-code-advantage.entity';
-import {InMemoryService} from '@/external-service/in-memory-storage/in-memory-storage';
+import {InMemoryStorageService} from '@/external-service/in-memory-storage/in-memory-storage';
 import {WeatherService} from '@/external-service/weather-service/weather.service';
 import {PromoCodeHelper} from '@/domain/promo-code/promo-code.helper';
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
@@ -22,7 +20,7 @@ import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 @Controller('promo-code')
 export class PromoCodeController {
   constructor(
-    private inMemoryService: InMemoryService<PromoCodeEntity>,
+    private inMemoryService: InMemoryStorageService<PromoCodeEntity>,
     private weatherService: WeatherService,
     private promoCodeHelper: PromoCodeHelper,
   ) {}
@@ -39,13 +37,9 @@ export class PromoCodeController {
       throw new ConflictException('Promo code already exist');
     }
 
-    const promoCode = new PromoCodeEntity();
-    promoCode.id = uuidv4();
-    promoCode.name = promoCodeRequest.name;
-    promoCode.advantage = new PromoCodeAdvantageEntity(
+    const promoCode = this.promoCodeHelper.createPromoCode(
+      promoCodeRequest.name,
       promoCodeRequest.avantage.percent,
-    );
-    promoCode.restrictions = this.promoCodeHelper.buildDecisionTree(
       promoCodeRequest.restrictions,
     );
 
@@ -70,7 +64,9 @@ export class PromoCodeController {
       throw new NotFoundException('Promo code not found');
     }
 
-    const paramsValidation: IsValidPromoCodeParams = {};
+    const paramsValidation: IsValidPromoCodeParams = {
+      selectedDate: new Date(),
+    };
 
     if (body.arguments.age) {
       paramsValidation.age = body.arguments.age;

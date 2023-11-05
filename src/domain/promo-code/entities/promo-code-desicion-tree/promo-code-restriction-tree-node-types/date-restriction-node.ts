@@ -1,7 +1,7 @@
-import {PromoCodeDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-decision-tree-node';
+import {PromoCodeRestrictionDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-restriction-decision-tree-node';
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 
-export class DateRestrictionNode extends PromoCodeDecisionTreeNode {
+export class DateRestrictionNode extends PromoCodeRestrictionDecisionTreeNode {
   _after?: Date;
   _before?: Date;
 
@@ -14,8 +14,11 @@ export class DateRestrictionNode extends PromoCodeDecisionTreeNode {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isValid(params: IsValidPromoCodeParams, reason: any[]): boolean {
-    const now = new Date();
+    if (!params || !params.selectedDate) {
+      throw new Error('Date is not defined');
+    }
 
+    const now = new Date(params.selectedDate);
     const isValid =
       new Date(this._after) <= now && now <= new Date(this._before);
     if (!isValid) {

@@ -1,10 +1,10 @@
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 
-export abstract class PromoCodeDecisionTreeNode {
+export abstract class PromoCodeRestrictionDecisionTreeNode {
   _type: string;
-  _children: PromoCodeDecisionTreeNode[] = [];
+  _children: PromoCodeRestrictionDecisionTreeNode[] = [];
 
-  addChild(node: PromoCodeDecisionTreeNode) {
+  addChild(node: PromoCodeRestrictionDecisionTreeNode) {
     this._children.push(node);
   }
 

@@ -4,8 +4,13 @@ export class ComparisonRules {
   _eq?: number;
 
   constructor(lt?: number, gt?: number, eq?: number) {
-    if (!lt && !gt && !eq) {
+    if (lt === undefined && gt === undefined && eq === undefined) {
       throw new Error('ComparisonRules must have at least one rule');
+    }
+    if (eq && (lt || gt)) {
+      throw new Error(
+        'ComparisonRules cannot have eq and lt/gt at the same time',
+      );
     }
     this._lt = lt;
     this._gt = gt;

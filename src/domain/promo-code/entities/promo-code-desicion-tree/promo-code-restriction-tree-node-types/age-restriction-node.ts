@@ -1,8 +1,8 @@
-import {PromoCodeDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-decision-tree-node';
+import {PromoCodeRestrictionDecisionTreeNode} from '@/domain/promo-code/entities/promo-code-desicion-tree/promo-code-restriction-decision-tree-node';
 import {ComparisonRules} from '@/domain/promo-code/entities/comparison-rules';
 import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
 
-export class AgeRestrictionNode extends PromoCodeDecisionTreeNode {
+export class AgeRestrictionNode extends PromoCodeRestrictionDecisionTreeNode {
   _age: ComparisonRules;
   constructor(age: ComparisonRules) {
     super();
