@@ -46,3 +46,8 @@ export interface IsValidPromoCodeParams {
   meteoTemp?: number;
   selectedDate?: Date;
 }
+
+export enum PromoCodeStatusValidation {
+  ACCEPTED = 'accepted',
+  DENIED = 'denied',
+}

@@ -15,7 +15,10 @@ import {PromoCodeEntity} from '@/domain/promo-code/entities/promo-code.entity';
 import {InMemoryStorageService} from '@/external-service/in-memory-storage/in-memory-storage';
 import {WeatherService} from '@/external-service/weather-service/weather.service';
 import {PromoCodeHelper} from '@/domain/promo-code/promo-code.helper';
-import {IsValidPromoCodeParams} from '@/domain/promo-code/promo-code.type';
+import {
+  IsValidPromoCodeParams,
+  PromoCodeStatusValidation,
+} from '@/domain/promo-code/promo-code.type';
 
 @Controller('promo-code')
 export class PromoCodeController {
@@ -89,7 +92,7 @@ export class PromoCodeController {
     if (isValid) {
       return {
         promocode_name: promoCode.name,
-        status: 'accepted',
+        status: PromoCodeStatusValidation.ACCEPTED,
         avantage: {
           percent: promoCode.advantage.percent,
         },
@@ -97,7 +100,7 @@ export class PromoCodeController {
     }
     return {
       promocode_name: promoCode.name,
-      status: 'denied',
+      status: PromoCodeStatusValidation.DENIED,
       reasons: [...reasonInvalidationCodePromo],
     };
   }
